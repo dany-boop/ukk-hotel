@@ -79,7 +79,7 @@ app.put('/', upload.uploadImage.single(`foto`), auth, async (req, res) => {
         let oldImg = await user.findOne({ where: params });
         let oldImgName = oldImg.foto;
 
-        let loc = path.join(__dirname, '../resource/usr/', oldImgName);
+        let loc = path.join(__dirname, '../foto/', oldImgName);
         fs.unlink(loc, (err) => console.log(err));
 
         data.foto = req.file.filename;
