@@ -1,5 +1,5 @@
 .navbarFixed {
-    @apply fixed z-[9999] bg-white bg-opacity-70 shadow-md;
+    @apply fixed z-[9999] bg-white bg-opacity-40 shadow-md;
     backdrop-filter: blur(10px);
 }
 

@@ -56,27 +56,27 @@ function Navbar() {
                                 <ul className='block lg:flex'>
                                     <li className='group'>
                                         <Link href='/' legacyBehavior>
-                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-500 transition duration-300 ease-in-out'>Home</a>
+                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>Home</a>
                                         </Link>
                                     </li>
                                     <li className='group'>
                                         <Link href='/' legacyBehavior>
-                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-500 transition duration-300 ease-in-out'>About Us</a>
+                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>About Us</a>
                                         </Link>
                                     </li>
                                     <li className='group'>
                                         <Link href='/' legacyBehavior>
-                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-500 transition duration-300 ease-in-out'>Service</a>
+                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>Service</a>
                                         </Link>
                                     </li>
                                     <li className='group'>
                                         <Link href='/' legacyBehavior>
-                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-500 transition duration-300 ease-in-out'>Projects</a>
+                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>Projects</a>
                                         </Link>
                                     </li>
                                     <li className='group'>
-                                        <Link href='/' legacyBehavior>
-                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-500 transition duration-300 ease-in-out'>Contact</a>
+                                        <Link href='../../Login' legacyBehavior>
+                                            <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>Login</a>
                                         </Link>
                                     </li>
                                 </ul>
