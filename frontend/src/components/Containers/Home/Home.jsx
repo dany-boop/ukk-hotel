@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 
-import Navbar from '../../Common/Navbar/Navbar'
-import Footer from '../../Common/Footer'
+import Navbar from '@/components/Common/Navbar/Navbar'
+import Footer from '@/components/Common/Footer'
 import TopSection from './components/TopSection'
 import AboutSection from './components/About'
 
@@ -11,7 +11,7 @@ function ContainerHome() {
     return (
         <>
             <Head>
-                <title>Hotel</title>
+                <title>Wikusama Hotel</title>
             </Head>
 
             <Navbar />

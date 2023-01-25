@@ -20,7 +20,7 @@ module.exports = {
       },
       tgl_pemesanan: {
         type: 'TIMESTAMP',
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.DATE,
         allowNull: false
       },
       tgl_check_in: {

@@ -11,11 +11,11 @@ function Footer() {
                         {/* // logo - start --> */}
                         <div className="lg:-mt-2 mb-4">
                             <a href="/" className="inline-flex items-center text-black-800 text-xl md:text-2xl font-bold gap-2" aria-label="logo">
-                                <svg width="95" height="94" viewBox="0 0 95 94" className="w-5 h-auto text-indigo-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="95" height="94" viewBox="0 0 95 94" className="w-5 h-auto text-yellow-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M96 0V47L48 94H0V47L48 0H96Z" />
                                 </svg>
 
-                                Flowrift
+                                Wikusama Hotel
                             </a>
                         </div>
                         {/* // logo - end --> */}

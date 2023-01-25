@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.user, { foreignKey: 'id_user', as: 'user' });
+
+      this.belongsTo(models.tipe_kamar, { foreignKey: 'id_tipe_kamar', as: 'tipe_kamar' });
+
+      this.hasMany(models.detail_pemesanan, { foreignKey: 'id_pemesanan', as: 'detail_pemesanan' });
     }
   }
   pemesanan.init({
@@ -22,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     nomor_pemesan: DataTypes.INTEGER,
     nama_pemesan: DataTypes.STRING,
     email_pemesan: DataTypes.STRING,
-    tgl_pemesanan: DataTypes.TIMESTAMP,
+    tgl_pemesanan: DataTypes.DATE,
     tgl_check_in: DataTypes.DATE,
     tgl_check_out: DataTypes.DATE,
     nama_tamu: DataTypes.STRING,
