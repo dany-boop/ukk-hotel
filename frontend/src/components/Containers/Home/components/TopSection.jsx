@@ -2,24 +2,21 @@ import React from 'react'
 
 function TopSection() {
     return (
-        <section className='py-16'>
-            <div className="max-w-7xl px-4 md:px-8 mx-auto">
-                <div className="flex flex-wrap justify-between mb-8 md:mb-16">
-                    <div className="w-full lg:w-1/3 flex flex-col justify-center lg:pt-48 lg:pb-24 mb-6 sm:mb-12 lg:mb-0">
-                        <h1 className="text-indigo-800 text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-8">Find your<br />style online</h1>
+        <section className="max-w-7xl mx-auto px-4">
+            <div className="rounded-xl min-h-96 flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg relative my-10 py-16 md:py-20 xl:py-48">
+                <img
+                    src="/assets/img/hotel_pool.jpg"
+                    alt="Photo by Fakurian Design"
+                    className="w-full h-full object-cover object-center absolute inset-0 opacity-80"
+                />
 
-                        <p className="max-w-md text-gray-500 xl:text-lg leading-relaxed">This is a section of some simple filler text, also known as placeholder text. It shares characteristics of real text.</p>
-                    </div>
-
-                    <div className="w-full lg:w-2/3 flex mb-12 md:mb-16">
-                        <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden relative z-10 top-12 md:top-16 left-12 md:left-16 -ml-12 lg:ml-0">
-                            <img src="https://images.unsplash.com/photo-1542340916-951bb72c8f74?auto=format&q=75&fit=crop&w=550&h=550" loading="lazy" alt="Photo by Kaung Htet" className="w-full h-full object-cover object-center" />
-                        </div>
-
-                        <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1586295166487-b265f7e83a7f?auto=format&q=75&fit=crop&w=550&h=550" loading="lazy" alt="Photo by Manny Moreno" className="w-full h-full object-cover object-center" />
-                        </div>
-                    </div>
+                <div className="border-8 border-yellow-500 sm:max-w-xl flex flex-col items-center relative p-4">
+                    <p className="font-semibold text-white text-lg sm:text-xl text-center mb-4 md:mb-8">
+                        Very proud to introduce
+                    </p>
+                    <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-10 md:mb-12">
+                        Wikusama Hotel
+                    </h1>
                 </div>
             </div>
         </section>

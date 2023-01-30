@@ -12,11 +12,12 @@ function ContainerHome() {
         <>
             <Head>
                 <title>Wikusama Hotel</title>
+                <link rel="preload" as="image" href="/assets/img/hotelpool.jpg" />
             </Head>
 
             <Navbar />
 
-            <main className='pt-20'>
+            <main className="pt-20">
                 <TopSection />
                 <AboutSection />
             </main>

@@ -4,8 +4,8 @@ const year = new Date().getFullYear();
 
 function Footer() {
     return (
-        <div className="bg-white pt-4 sm:pt-10 lg:pt-12">
-            <footer className="max-w-screen-2xl px-4 md:px-8 mx-auto">
+        <div className="bg-white pt-2 sm:pt-8 lg:pt-10">
+            <footer className="max-w-7xl px-4 mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 border-t gap-12 lg:gap-8 pt-10 lg:pt-12 mb-16">
                     <div className="col-span-full lg:col-span-2">
                         {/* // logo - start --> */}

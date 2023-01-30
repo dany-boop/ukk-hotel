@@ -3,13 +3,13 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require('fs');
-const SECRET_KEY = process.env.SECRET_KEY;
+const SECRET_KEY = 'hotelmahal';
 
 const auth = require('../middleware/auth');
 const user = require('../models/index').user;
 const upload = require('../middleware/imageUser');
 
-const app = express();
+const app = express(); 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -49,7 +49,7 @@ app.get('/:id', auth, async (req, res) => {
 app.post('/', upload.uploadImage.single(`foto`), async (req, res) => {
     let data = {
         nama_user: req.body.nama_user,
-        foto: req.file.filename,
+        // foto: req.file.filename,
         email: req.body.email,
         password: md5(req.body.password),
         role: req.body.role
@@ -129,7 +129,7 @@ app.post('/admin', async (req, res) => {
             if (result) {
                 let payload = JSON.stringify(result);
                 let token = jwt.sign(payload, SECRET_KEY);
-                res.json({ success: 1, message: "Login success, welcome back!", token: token })
+                res.json({ success: 1, message: "Login success, welcome back!", data: result, token: token })
             } else {
                 res.json({ success: 0, message: "Invalid email or password!" })
             }
