@@ -6,7 +6,7 @@ function TopSection() {
             <div className="rounded-xl min-h-96 flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg relative my-10 py-16 md:py-20 xl:py-48">
                 <img
                     src="/assets/img/hotel_pool.jpg"
-                    alt="Photo by Fakurian Design"
+                    alt="Hotel Pool"
                     className="w-full h-full object-cover object-center absolute inset-0 opacity-80"
                 />
 
