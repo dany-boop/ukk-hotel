@@ -3,52 +3,59 @@ const path = require('path');
 const fs = require('fs');
 
 const auth = require('../middleware/auth');
+const { uploadTypeRoom } = require('../middleware/uploadImage');
 const tipe_kamar = require('../models/index').tipe_kamar;
-const upload = require('../middleware/imageRoom');
+const kamar = require('../models/index').kamar;
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 /**
- * @apiRoutes {get} /hotel/tipe_kamar/
+ * @apiRoutes {get} /hotel/type-room/
  * @apiName GetAllTypeRoom
  * @apiGroup TypeRoom
  * @apiDescription Get all type room data
  */
 app.get('/', async (req, res) => {
-    await tipe_kamar.findAll()
+    await tipe_kamar.findAll({ include: ['kamar'] })
         .then(result => res.json({ data: result }))
         .catch(error => res.json({ message: error.message }))
 });
 
 /**
- * @apiRoutes {get} /hotel/tipe_kamar/:id
+ * @apiRoutes {get} /hotel/type-room/:id
  * @apiName GetTypeRoomById
  * @apiGroup TypeRoom
  * @apiDescription Get type room data by id
  */
 app.get('/:id', async (req, res) => {
-    let params = { id_tipe_kamar: req.params.id_tipe_kamar };
+    let params = { id_tipe_kamar: req.params.id };
 
-    await tipe_kamar.findOne({ where: params })
+    await tipe_kamar.findOne({ where: params, include: ['kamar'] })
         .then(result => res.json({ data: result }))
         .catch(error => res.json({ message: error.message }))
 });
 
 /**
- * @apiRoutes {post} /hotel/tipe_kamar/
+ * @apiRoutes {post} /hotel/type-room/
  * @apiName PostTypeRoom
  * @apiGroup TypeRoom
  * @apiDescription Insert type room data
  */
-app.post('/', upload.uploadImage.single('foto'), auth, async (req, res) => {
+app.post('/', uploadTypeRoom.array('foto', 5), auth, async (req, res) => {
+    if (!req.file) return res.json({ message: "No file uploaded" })
+
+    let finalImageArrayURL = [];
+
+    req.files.forEach((file) => {
+        let finalImageURL = req.protocol + '://' + req.get('host') + '/img/' + file.filename;
+        finalImageArrayURL.push(finalImageURL);
+    });
+
     let data = {
         nama_tipe_kamar: req.body.nama_tipe_kamar,
         harga: req.body.harga,
         deskripsi: req.body.deskripsi,
-        foto: req.file.filename
+        foto: finalImageArrayURL
     }
 
     await tipe_kamar.create(data)
@@ -57,27 +64,42 @@ app.post('/', upload.uploadImage.single('foto'), auth, async (req, res) => {
 });
 
 /**
- * @apiRoutes {put} /hotel/tipe_kamar/
+ * @apiRoutes {put} /hotel/type-room/
  * @apiName PutTypeRoom
  * @apiGroup TypeRoom
- * @apiDescription Update tipe_kamar data
+ * @apiDescription Update type room data
  */
-app.put('/', upload.uploadImage.single('foto'), auth, async (req, res) => {
-    let params = { id_tipe_kamar: req.body.id_tipe_kamar }
+app.put('/:id', uploadTypeRoom.array('foto', 5), auth, async (req, res) => {
+    if (!req.file) return res.json({ message: "No file uploaded" })
+
+    let params = { id_tipe_kamar: req.params.id };
     let data = {
         nama_tipe_kamar: req.body.nama_tipe_kamar,
         harga: req.body.harga,
-        deskripsi: req.body.deskripsi,
+        deskripsi: req.body.deskripsi
     }
 
-    if (req.file) {
-        let oldImg = await tipe_kamar.findOne({ where: params });
-        let oldImgName = oldImg.foto;
+    if (req.files) {
+        let delImg = await tipe_kamar.findOne({ where: params });
 
-        let loc = path.join(__dirname, '../foto/', oldImgName);
-        fs.unlink(loc, (err) => console.log(err));
+        if (delImg) {
+            let delImgName = delImg.foto;
+            delImgName.forEach((img) => {
+                let imgName = img.split('/').pop();
 
-        data.foto = req.file.filename;
+                let loc = path.join(__dirname, '../foto/room/' + imgName);
+                fs.unlinkSync(loc, (err) => console.log(err));
+            });
+        }
+
+        let finalImageArrayURL = [];
+
+        req.files.forEach((file) => {
+            let finalImageURL = req.protocol + '://' + req.get('host') + '/img/' + file.filename;
+            finalImageArrayURL.push(finalImageURL);
+        });
+
+        data.foto = finalImageArrayURL;
     }
 
     await tipe_kamar.update(data, { where: params })
@@ -86,23 +108,34 @@ app.put('/', upload.uploadImage.single('foto'), auth, async (req, res) => {
 });
 
 /**
- * @apiRoutes {delete} /hotel/tipe_kamar/:id
+ * @apiRoutes {delete} /hotel/type-room/:id
  * @apiName DeleteTypeRoom
  * @apiGroup TypeRoom
  * @apiDescription Delete type room data
  */
 app.delete('/:id', auth, async (req, res) => {
-    let params = { id_tipe_kamar: req.params.id_tipe_kamar }
-
+    let params = { id_tipe_kamar: req.params.id };
     let delImg = await tipe_kamar.findOne({ where: params });
+
     if (delImg) {
         let delImgName = delImg.foto;
-        let loc = path.join(__dirname, '../foto/', delImgName);
-        fs.unlink(loc, (err) => console.log(err));
+        delImgName.forEach((img) => {
+            let imgName = img.split('/').pop();
+
+            let loc = path.join(__dirname, '../foto/room/' + imgName);
+            fs.unlinkSync(loc, (err) => console.log(err));
+        });
     }
 
+    // let delImg = await tipe_kamar.findOne({ where: params });
+    // if(delImg) {
+    //   let delImgName = delImg.foto;
+    //   let loc = path.join(__dirname, '../foto/room/', delImgName);
+    //   fs.unlink(loc, (err) => console.log(err));
+    // }
+
     await tipe_kamar.destroy({ where: params })
-        .then(result => res.json({ success: 1, message: "Data has been deleted" }))
+        .then(result => res.json({ message: 'Data has been deleted' }))
         .catch(error => res.json({ message: error.message }))
 });
 

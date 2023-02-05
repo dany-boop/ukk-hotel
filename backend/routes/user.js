@@ -1,18 +1,16 @@
 const express = require('express');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const SECRET_KEY = 'hotelmahal';
 
 const auth = require('../middleware/auth');
+const { uploadUser } = require('../middleware/uploadImage');
 const user = require('../models/index').user;
-const upload = require('../middleware/imageUser');
 
-const app = express(); 
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = express();
 
 /**
  * @apiRoutes {get} /hotel/user/
@@ -46,10 +44,14 @@ app.get('/:id', auth, async (req, res) => {
  * @apiGroup User
  * @apiDescription Insert user data
  */
-app.post('/', upload.uploadImage.single(`foto`), async (req, res) => {
+app.post('/', uploadUser.single('foto'), async (req, res) => {
+    if (!req.file) return res.json({ message: "No file uploaded" })
+
+    let finalImageURL = req.protocol + '://' + req.get('host') + '/user/' + req.file.filename;
+
     let data = {
         nama_user: req.body.nama_user,
-        // foto: req.file.filename,
+        foto: finalImageURL,
         email: req.body.email,
         password: md5(req.body.password),
         role: req.body.role
@@ -66,7 +68,9 @@ app.post('/', upload.uploadImage.single(`foto`), async (req, res) => {
  * @apiGroup User
  * @apiDescription Update user data
  */
-app.put('/', upload.uploadImage.single(`foto`), auth, async (req, res) => {
+app.put('/', uploadUser.single('foto'), auth, async (req, res) => {
+    if (!req.file) return res.json({ message: "No file uploaded" })
+
     let params = { id_user: req.body.id_user }
     let data = {
         nama_user: req.body.nama_user,
@@ -79,10 +83,11 @@ app.put('/', upload.uploadImage.single(`foto`), auth, async (req, res) => {
         let oldImg = await user.findOne({ where: params });
         let oldImgName = oldImg.foto;
 
-        let loc = path.join(__dirname, '../foto/', oldImgName);
+        let loc = path.join(__dirname, '../foto/user/', oldImgName);
         fs.unlink(loc, (err) => console.log(err));
 
-        data.foto = req.file.filename;
+        let finalImageURL = req.protocol + '://' + req.get('host') + '/usr/' + req.file.filename;
+        data.foto = finalImageURL;
     }
 
     await user.update(data, { where: params })
@@ -102,7 +107,7 @@ app.delete('/:id', auth, async (req, res) => {
     let delImg = await user.findOne({ where: params });
     if (delImg) {
         let delImgName = delImg.foto;
-        let loc = path.join(__dirname, '../resource/usr/', delImgName);
+        let loc = path.join(__dirname, '../foto/user/', delImgName);
         fs.unlink(loc, (err) => console.log(err));
     }
 
@@ -129,7 +134,7 @@ app.post('/admin', async (req, res) => {
             if (result) {
                 let payload = JSON.stringify(result);
                 let token = jwt.sign(payload, SECRET_KEY);
-                res.json({ success: 1, message: "Login success, welcome back!", data: result, token: token })
+                res.json({ success: 1, message: "Login success, welcome back!", token: token })
             } else {
                 res.json({ success: 0, message: "Invalid email or password!" })
             }
