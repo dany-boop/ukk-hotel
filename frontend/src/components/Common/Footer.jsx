@@ -10,13 +10,7 @@ function Footer() {
                     <div className="col-span-full lg:col-span-2">
                         {/* // logo - start --> */}
                         <div className="lg:-mt-2 mb-4">
-                            <a href="/" className="inline-flex items-center text-black-800 text-xl md:text-2xl font-bold gap-2" aria-label="logo">
-                                <svg width="95" height="94" viewBox="0 0 95 94" className="w-5 h-auto text-yellow-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M96 0V47L48 94H0V47L48 0H96Z" />
-                                </svg>
-
-                                Wikusama Hotel
-                            </a>
+                            Wikusama Hotel
                         </div>
                         {/* // logo - end --> */}
 
@@ -61,10 +55,6 @@ function Footer() {
                             </div>
 
                             <div>
-                                <a href="#" className="text-gray-500 hover:text-yellow-500 active:text-yellow-600 transition duration-100">Solutions</a>
-                            </div>
-
-                            <div>
                                 <a href="#" className="text-gray-500 hover:text-yellow-500 active:text-yellow-600 transition duration-100">Pricing</a>
                             </div>
 
@@ -90,10 +80,6 @@ function Footer() {
 
                             <div>
                                 <a href="#" className="text-gray-500 hover:text-yellow-500 active:text-yellow-600 transition duration-100">Jobs</a>
-                            </div>
-
-                            <div>
-                                <a href="#" className="text-gray-500 hover:text-yellow-500 active:text-yellow-600 transition duration-100">Press</a>
                             </div>
 
                             <div>
@@ -138,10 +124,6 @@ function Footer() {
 
                             <div>
                                 <a href="#" className="text-gray-500 hover:text-yellow-500 active:text-yellow-600 transition duration-100">Privacy Policy</a>
-                            </div>
-
-                            <div>
-                                <a href="#" className="text-gray-500 hover:text-yellow-500 active:text-yellow-600 transition duration-100">Cookie settings</a>
                             </div>
                         </nav>
                     </div>

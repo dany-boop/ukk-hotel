@@ -1,6 +1,6 @@
 .navbarFixed {
     @apply fixed z-[9999] bg-white bg-opacity-70 shadow-md;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
 }
 
 .hamburgerLine {

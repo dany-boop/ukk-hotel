@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-// import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from '@/components/Common/Navbar/Navbar.module.css'
@@ -41,7 +40,7 @@ function Navbar() {
                     <div className="flex items-center justify-between relative">
                         <div className="px-4">
                             <Link href='/' legacyBehavior>
-                                <a className='block py-6 font-bold text-2xl leading-relaxed'>
+                                <a className='block py-6 font-serif text-2xl leading-relaxed'>
                                     Wikusama Hotel
                                     {/* <Image src={Logo} width={100} height={40} alt="Logo Brand" /> */}
                                 </a>
@@ -57,9 +56,9 @@ function Navbar() {
                             <nav id='navMenu' className='hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none'>
                                 <ul className='block lg:flex'>
                                     {headerNavLink.map((a, i) => (
-                                        <li className='group'>
+                                        <li className='group' key={i}>
                                             <Link href={a.url} legacyBehavior>
-                                                <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>{a.title}</a>
+                                                <a className='text-base font-sans text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>{a.title}</a>
                                             </Link>
                                         </li>
                                     ))}

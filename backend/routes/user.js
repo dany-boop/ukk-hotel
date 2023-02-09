@@ -1,7 +1,6 @@
 const express = require('express');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const SECRET_KEY = 'hotelmahal';
@@ -86,7 +85,7 @@ app.put('/', uploadUser.single('foto'), auth, async (req, res) => {
         let loc = path.join(__dirname, '../foto/user/', oldImgName);
         fs.unlink(loc, (err) => console.log(err));
 
-        let finalImageURL = req.protocol + '://' + req.get('host') + '/usr/' + req.file.filename;
+        let finalImageURL = req.protocol + '://' + req.get('host') + '/user/' + req.file.filename;
         data.foto = finalImageURL;
     }
 
@@ -128,18 +127,17 @@ app.post('/admin', async (req, res) => {
         password: md5(req.body.password),
         role: 'admin'
     }
-
     await user.findOne({ where: params })
-        .then(result => {
-            if (result) {
-                let payload = JSON.stringify(result);
-                let token = jwt.sign(payload, SECRET_KEY);
-                res.json({ success: 1, message: "Login success, welcome back!", token: token })
-            } else {
-                res.json({ success: 0, message: "Invalid email or password!" })
-            }
-        })
-        .catch(error => res.json({ message: error.message }))
+    .then(result => {
+        if (result) {
+            let payload = JSON.stringify(result);
+            let token = jwt.sign(payload, SECRET_KEY);
+            res.json({ success: 1, message: "Login success, welcome back!", data: result, token: token })
+        } else {
+            res.json({ success: 0, message: "Invalid email or password!" })
+        }
+    })
+    .catch(error => res.json({ message: error.message }))
 });
 
 /**
@@ -147,14 +145,15 @@ app.post('/admin', async (req, res) => {
  * @apiName LoginUserResepsionis
  * @apiGroup User
  * @apiDescription Login user resepsionis
- */
+*/
 app.post('/resepsionis', async (req, res) => {
     let params = {
         email: req.body.email,
         password: md5(req.body.password),
         role: 'resepsionis'
     }
-
+    
+    console.log(params)
     await user.findOne({ where: params })
         .then(result => {
             if (result) {

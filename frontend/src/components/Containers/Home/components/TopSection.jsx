@@ -2,10 +2,11 @@ import React from 'react'
 
 function TopSection() {
     return (
-        <section className="max-w-7xl mx-auto px-4">
-            <div className="rounded-xl min-h-96 flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg relative my-10 py-16 md:py-20 xl:py-48">
+        <section className="max-w-full mx-auto px-4">
+            <div className="min-h-min flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg relative my-1 py-16 md:py-40 xl:py-72">
                 <img
                     src="/assets/img/hotel_pool.jpg"
+                    loading="lazy"
                     alt="Hotel Pool"
                     className="w-full h-full object-cover object-center absolute inset-0 opacity-80"
                 />

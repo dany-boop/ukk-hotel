@@ -12,7 +12,6 @@ function ContainerHome() {
         <>
             <Head>
                 <title>Wikusama Hotel</title>
-                <link rel="preload" as="image" href="/assets/img/hotelpool.jpg" />
             </Head>
 
             <Navbar />
