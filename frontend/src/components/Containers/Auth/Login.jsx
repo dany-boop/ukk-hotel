@@ -10,38 +10,46 @@ import Footer from '@/components/Common/Footer'
 function ContainerLogin() {
     const router = useRouter();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loggedSuccess, setLoggedSuccess] = useState(false);
-    const [loggedFailed, setLoggedFailed] = useState(false);
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+    });
+    const [isLoginSuccess, setIsLoginSuccess] = useState(0);
 
 
     // POST Data Login below here
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const sendData = { email, password };
+        const sendData = { ...data };
 
         axios
-            .post('/user/admin', sendData)
+            .post('/user/login', sendData)
             .then((res) => {
                 if (res.data.success === 1) {
-                    setLoggedSuccess(true);
-                    setLoggedFailed(false);
+                    setIsLoginSuccess(1);
 
-                    const admin = res.data.data;
-                    const token = res.data.token;
-                    localStorage.setItem('admin', JSON.stringify(admin));
-                    localStorage.setItem('token', token);
-                    router.push('/admin/dashboard');
+                    localStorage.setItem('token', res.data.token);
+
+                    if (res.data.data.role === 'admin') {
+                        localStorage.setItem('admin', JSON.stringify(res.data.data));
+                        router.push('/admin/dashboard')
+                    } else if (res.data.data.role === 'resepsionis') {
+                        localStorage.setItem('resepsionis', JSON.stringify(res.data.data));
+                        router.push('/resepsionis/dashboard')
+                    }
                 } else {
-                    setLoggedSuccess(false);
-                    setLoggedFailed(true);
+                    setIsLoginSuccess(2);
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                setIsLoginSuccess(2);
+                console.log(err)
+            });
     };
     // POST Data Login above here
+
+    console.log(data);
 
     return (
         <>
@@ -55,17 +63,17 @@ function ContainerLogin() {
                     <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">Login</h2>
 
                     <form className="max-w-lg border rounded-lg mx-auto" onSubmit={handleLogin}>
-                        {loggedFailed && (
-                            <div className="mx-4 md:mx-8 mt-4 md:mt-8 bg-red-500 p-3 rounded">
-                                <p className="text-white text-sm font-bold">
-                                    Username atau Password salah, silakan coba kembali!
-                                </p>
-                            </div>
-                        )}
-                        {loggedSuccess && (
+                        {isLoginSuccess === 1 && (
                             <div className="mx-4 md:mx-8 mt-4 md:mt-8 bg-green-500 p-3 rounded">
                                 <p className="text-white text-sm font-bold">
                                     Login Sukses, Selamat datang kembali!
+                                </p>
+                            </div>
+                        )}
+                        {isLoginSuccess === 2 && (
+                            <div className="mx-4 md:mx-8 mt-4 md:mt-8 bg-red-500 p-3 rounded">
+                                <p className="text-white text-sm font-bold">
+                                    Username atau Password salah, silakan coba kembali!
                                 </p>
                             </div>
                         )}
@@ -81,8 +89,8 @@ function ContainerLogin() {
                                     type="text"
                                     id="email"
                                     name="email"
-                                    value={email}
-                                    onChange={(e) => bindingState(e, setEmail, "email")}
+                                    value={data.email}
+                                    onChange={(e) => bindingState(e, setData, "email")}
                                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-300 rounded outline-none transition duration-100 px-3 py-2"
                                     required
                                 />
@@ -99,8 +107,8 @@ function ContainerLogin() {
                                     type="password"
                                     id="password"
                                     name="password"
-                                    value={password}
-                                    onChange={(e) => bindingState(e, setPassword, "password")}
+                                    value={data.password}
+                                    onChange={(e) => bindingState(e, setData, "password")}
                                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-300 rounded outline-none transition duration-100 px-3 py-2"
                                     required
                                 />

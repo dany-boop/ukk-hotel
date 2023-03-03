@@ -3,53 +3,59 @@ import Head from 'next/head'
 import { useRouter } from 'next/router';
 
 import axios from '@/lib/axios';
-import { bindingState } from '@/lib/bindingState';
+import { bindingState } from '@/lib/bindingState'
 import Navbar from '@/components/Common/Navbar/Navbar'
 import Footer from '@/components/Common/Footer'
 
 function ContainerRegister() {
     const router = useRouter();
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
-    const [image, setImage] = useState('');
-    const [storeSuccess, setStoreSuccess] = useState(false);
-    const [storeFailed, setStoreFailed] = useState(false);
+    const [data, setData] = useState({
+        nama_user: '',
+        email: '',
+        password: '',
+        foto: '',
+        role: 'default'
+    })
 
-    // const handleFile = (e) => {
-    //     if (e.target.files) setImage(e.target.files);
-    // }
+    const [image, setImage] = useState('https://fakeimg.pl/200x200');
+    const [storeSuccess, setStoreSuccess] = useState(false);
+    const [storeFailed, setStoreFailed] = useState(false)
+
+    const handleImage = (e) => {
+        //eslint-disable-next-line prefer-const
+        let foto = e.target.files[0];
+        setImage(URL.createObjectURL(foto));
+        setData({ ...data, foto });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const sendData = { ...data };
 
-        const sendData = {
-            nama_user: name,
-            foto: image,
-            email,
-            password,
-            role,
-        };
-        // console.log(sendData.foto + 'sdf')
-
-        axios
+        await axios
             .post('/user', sendData, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    'Content-Type': 'multipart/form-data',
                 }
             })
             .then((res) => {
-                console.log(res)
-                setStoreSuccess(true);
-                setStoreFailed(false);
-
-                router.push('/auth/login');
+                if (res.data.success === 1) {
+                    setStoreSuccess(true)
+                    setTimeout(() => {
+                        router.push('/auth/login');
+                    }, 1800);
+                } else {
+                    setStoreFailed(false);
+                }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                setStoreFailed(false);
+                console.log(err);
+            });
     };
+
 
     return (
         <>
@@ -78,19 +84,28 @@ function ContainerRegister() {
                             </div>
                         )}
                         <div className="flex flex-col gap-4 p-4 md:p-8">
+                            <div className='flex justify-center items-center'>
+                                <img
+                                    src={image}
+                                    loading="lazy"
+                                    alt="Image User Update"
+                                    className="w-[200px] h-[200px] object-cover object-center mt-2"
+                                />
+                            </div>
+
                             <div>
                                 <label
-                                    htmlFor="name"
+                                    htmlFor="nama_user"
                                     className="inline-block text-gray-800 text-sm sm:text-base mb-2"
                                 >
                                     Nama
                                 </label>
                                 <input
                                     type="text"
-                                    id="name"
-                                    name="name"
-                                    value={name}
-                                    onChange={(e) => bindingState(e, setName, "name")}
+                                    id="nama_user"
+                                    name="nama_user"
+                                    value={data.nama_user}
+                                    onChange={(e) => bindingState(e, setData, "nama_user")}
                                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
                                     required
                                 />
@@ -107,8 +122,8 @@ function ContainerRegister() {
                                     type="text"
                                     id="email"
                                     name="email"
-                                    value={email}
-                                    onChange={(e) => bindingState(e, setEmail, "email")}
+                                    value={data.email}
+                                    onChange={(e) => bindingState(e, setData, "email")}
                                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
                                     required
                                 />
@@ -125,53 +140,52 @@ function ContainerRegister() {
                                     type="password"
                                     id="password"
                                     name="password"
-                                    value={password}
-                                    onChange={(e) => bindingState(e, setPassword, "password")}
+                                    value={data.password}
+                                    onChange={(e) => bindingState(e, setData, "password")}
                                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
                                     required
                                 />
                             </div>
 
                             <div>
-                                <div>
-                                    <label
-                                        htmlFor="image"
-                                        className="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                                    >
-                                        Foto
-                                    </label>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        id="image"
-                                        name="image"
-                                        onChange={(e) => setImage(e.target.files[0])}
-                                        className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
-                                        required
-                                    />
-                                </div>
+                                <label
+                                    htmlFor="image"
+                                    className="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                                >
+                                    Foto
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="image"
+                                    name="image"
+                                    onChange={handleImage}
+                                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
+                                    required
+                                />
+                            </div>
 
-                                <div>
-                                    <label
-                                        htmlFor="role"
-                                        className="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                                    >
-                                        Role
-                                    </label>
-                                    <select
-                                        name="role"
-                                        id="role"
-                                        value={role}
-                                        onChange={(e) => bindingState(e, setRole, "role")}
-                                        className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
-                                    >
+                            <div>
+                                <label
+                                    htmlFor="role"
+                                    className="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                                >
+                                    Role
+                                </label>
+                                <select
+                                    name="role"
+                                    id="role"
+                                    value={data.role}
+                                    onChange={(e) => bindingState(e, setData, "role")}
+                                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-yellow-500  rounded outline-none transition duration-100 px-3 py-2"
+                                >
+                                    <option value="default" selected disabled>Pilih Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="resepsionis">Resepsionis</option>
+                                </select>
+                            </div>
 
-                                        <option selected >Pilih Role Lu</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="resepsionis">Resepsionis</option>
-                                    </select>
-                                </div>
-
+                            <div>
                                 <button type="submit" className="mt-10 flex justify-between items-center bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Register</button>
                             </div>
                         </div>

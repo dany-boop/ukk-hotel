@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     nama_tipe_kamar: DataTypes.STRING,
     harga: DataTypes.INTEGER,
     deskripsi: DataTypes.TEXT,
-    foto: DataTypes.BLOB("long")
+    foto: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'tipe_kamar',

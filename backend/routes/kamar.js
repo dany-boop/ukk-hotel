@@ -1,6 +1,7 @@
 const express = require('express');
 
 const auth = require('../middleware/auth');
+const tipe_kamar = require('../models/index').tipe_kamar;
 const kamar = require('../models/index').kamar;
 
 const app = express();
@@ -15,7 +16,7 @@ app.use(express.json());
  * @apiDescription Get all room data
  */
 app.get('/', async (req, res) => {
-    await kamar.findAll()
+    await kamar.findAll({ include: ['tipe_kamar'] })
         .then(result => res.json({ data: result }))
         .catch(error => res.json({ message: error.message }))
 });
@@ -29,7 +30,7 @@ app.get('/', async (req, res) => {
 app.get('/:id', async (req, res) => {
     let params = { id_kamar: req.params.id };
 
-    await kamar.findOne({ where: params })
+    await kamar.findOne({ where: params, include: ['tipe_kamar'] })
         .then(result => res.json({ data: result }))
         .catch(error => res.json({ message: error.message }))
 });

@@ -121,45 +121,17 @@ app.delete('/:id', auth, async (req, res) => {
  * @apiGroup User
  * @apiDescription Login user admin
  */
-app.post('/admin', async (req, res) => {
+app.post('/login', async (req, res) => {
     let params = {
         email: req.body.email,
         password: md5(req.body.password),
-        role: 'admin'
     }
-    await user.findOne({ where: params })
-    .then(result => {
-        if (result) {
-            let payload = JSON.stringify(result);
-            let token = jwt.sign(payload, SECRET_KEY);
-            res.json({ success: 1, message: "Login success, welcome back!", data: result, token: token })
-        } else {
-            res.json({ success: 0, message: "Invalid email or password!" })
-        }
-    })
-    .catch(error => res.json({ message: error.message }))
-});
-
-/**
- * @apiRoutes {post} /hotel/user/resepsionis
- * @apiName LoginUserResepsionis
- * @apiGroup User
- * @apiDescription Login user resepsionis
-*/
-app.post('/resepsionis', async (req, res) => {
-    let params = {
-        email: req.body.email,
-        password: md5(req.body.password),
-        role: 'resepsionis'
-    }
-    
-    console.log(params)
     await user.findOne({ where: params })
         .then(result => {
             if (result) {
                 let payload = JSON.stringify(result);
                 let token = jwt.sign(payload, SECRET_KEY);
-                res.json({ success: 1, message: "Login success, welcome back!", token: token })
+                res.json({ success: 1, message: "Login success, welcome back!", data: result, token: token })
             } else {
                 res.json({ success: 0, message: "Invalid email or password!" })
             }

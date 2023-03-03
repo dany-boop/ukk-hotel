@@ -1,8 +1,10 @@
-import {FC} from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Navbar from '@/components/Common/Navbar/Navbar';
+import Footer from '@/components/Common/Footer';
 
-const ContainerNotFound: FC = () => {
+const ContainerNotFound = () => {
   return (
     <>
       <Head>
@@ -15,7 +17,7 @@ const ContainerNotFound: FC = () => {
         <meta property="og:url" content="https://klinik-next.vercel.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="id_ID" />
-        <meta property="og:site_name" content="Brand Klinik" />
+        <meta property="og:site_name" content="Wikusama Hotel" />
         <meta
           property="og:description"
           content="Mohon maaf, halaman yang Anda cari tidak dapat kami temukan."
@@ -24,15 +26,12 @@ const ContainerNotFound: FC = () => {
         <meta
           property="og:image"
           content="http://klinik-next.vercel.app/assets/svg/undraw_not_found.svg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Brand Klinik" />
-        <meta
-          name="twitter:description"
-          content="Mohon maaf, halaman yang Anda cari tidak dapat kami temukan."
-        />
 
+        />
+        <link rel="canonical" href="https://wikusamahotel.com/" />
       </Head>
+
+      <Navbar />
 
       <main className="py-20">
         <section className="py-20">
@@ -41,7 +40,7 @@ const ContainerNotFound: FC = () => {
               <div className="flex flex-wrap-reverse items-center justify-center">
                 <div className="w-full px-4 lg:w-1/2">
                   <div className="flex flex-col justify-center items-center sm:items-start md:py-24 lg:py-32">
-                    <p className="text-primary text-sm md:text-base font-semibold uppercase mb-4">
+                    <p className="text-primary text-sm md:text-base text-red-600 font-semibold uppercase mb-4">
                       Error 404
                     </p>
                     <h1 className="text-gray-800 text-2xl md:text-3xl font-bold text-center sm:text-left mb-2">
@@ -64,7 +63,7 @@ const ContainerNotFound: FC = () => {
                 <div className="w-full px-4 lg:w-1/2">
                   <div className="mb-10 lg:mb-0">
                     <img
-                      src="/assets/svg/undraw_not_found.svg"
+                      src="/assets/svg/bad-gateway.svg"
                       loading="lazy"
                       alt="Photo by @heydevn"
                       className="w-full h-full object-cover object-center"
@@ -76,6 +75,8 @@ const ContainerNotFound: FC = () => {
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   );
 };

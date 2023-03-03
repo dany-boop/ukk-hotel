@@ -14,12 +14,12 @@ import {
     FaUserFriends,
 } from 'react-icons/fa';
 
-//import axios from '../../lib/axios';
-//import { logout } from '../../lib/logout';
-//import { blockAccess } from '../../lib/blockAccess';
-//import { classNames } from '../../lib/classNames';
+import axios from '../../lib/axios';
+import { logout } from '../../lib/logout';
+import { blockAccess } from '../../lib/blockAccess';
+import { classNames } from '../../lib/classNames';
 
-function Sidebar = () {
+function Sidebar() {
     // Define Router
     const router = useRouter();
     const { pathname } = router;
@@ -33,11 +33,11 @@ function Sidebar = () {
 
     // Active ClassName for Navigation
     const activeClass =
-        'bg-primary rounded text-white text-xs uppercase p-3 mt-2 mb-1 font-bold flex';
+        'bg-yellow-500 rounded text-white text-xs uppercase p-3 mt-2 mb-1 font-bold flex'
     const inActiveClass =
-        'text-gray-500 hover:text-gray-400 text-xs uppercase py-3 font-bold flex';
+        'text-yellow-900 hover:text-black text-xs uppercase py-3 font-bold flex'
 
-    const isMenuActive = (path: string) => {
+    const isMenuActive = (path) => {
         const isDashboard =
             (pathname === '/admin/dashboard' && path === '/admin/dashboard') ||
             (pathname === '/receptionist/dashboard' &&
@@ -65,7 +65,7 @@ function Sidebar = () {
             icon: <FaHome className="mr-2 text-lg" />,
         },
         {
-            path: '/admin/type-room',
+            path: '/admin/room-type',
             name: 'Tipe Kamar',
             icon: <FaBuilding className="mr-2 text-lg" />,
         },
@@ -94,7 +94,7 @@ function Sidebar = () {
             await axios
                 .get('/user', {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('access')}`,
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
                 })
                 .then(() => setUserName(admin.nama_user))
@@ -102,12 +102,10 @@ function Sidebar = () {
         };
 
         Promise.all([getAdmin()]);
-
-        console.log(userName);
     }, []);
 
     // Block Access if Login level is not Admin
-    blockAccess('admin' || 'receptionist', router);
+    blockAccess('admin' || 'resepsionis', router);
 
     return (
         <>
@@ -203,7 +201,7 @@ function Sidebar = () {
 
                             <li>
                                 <Link href="/" legacyBehavior>
-                                    <a className="text-gray-500 hover:text-gray-400 text-xs uppercase py-3 font-bold flex">
+                                    <a className="text-yellow-900 hover:text-black text-xs uppercase py-3 font-bold flex">
                                         <FaGlobe className="mr-2 text-lg" />
                                         Landing Page
                                     </a>
