@@ -14,8 +14,8 @@ const app = express();
  * @apiDescription Filter room by date
  */
 app.post('/', async (req, res) => {
-    let checkInDate = req.body.check_in_date;
-    let checkOutDate = req.body.check_out_date;
+    let checkInDate = req.body.tgl_check_in;
+    let checkOutDate = req.body.tgl_check_out;
 
     let roomData = await tipe_kamar.findAll({ include: [{ model: kamar, as: "kamar" }] });
 

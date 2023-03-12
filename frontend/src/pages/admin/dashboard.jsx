@@ -1,4 +1,4 @@
-import ContainerDashboard from '../../components/Containers/admin/dashboard';
+import ContainerDashboard from '../../components/Containers/dashboard/dashboard';
 
 const DashboardAdmin = () => {
     return <ContainerDashboard />;

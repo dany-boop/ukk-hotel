@@ -4,6 +4,7 @@ const StatsSection = ({
     dataTypeRoom,
     dataRoom,
     dataUser,
+    dataBooking,
 }) => {
     return (
         <section>
@@ -26,6 +27,27 @@ const StatsSection = ({
                         <p>Total Tipe Kamar</p>
                     </div>
                 </div>
+
+                <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-slate-100 dark:border-white text-white font-medium group">
+                    <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+                        <svg
+                            width="30"
+                            height="30"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            className="fill-current text-slate-800 transform transition-transform duration-500 ease-in-out"
+                        >
+                            <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+                        </svg>
+                    </div>
+
+                    <div className="text-right">
+                        <p className="text-2xl">{dataBooking.length}</p>
+                        <p>Total Pemesanan</p>
+                    </div>
+                </div>
+
                 <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-slate-100 dark:border-white text-yellow-500 font-medium group">
                     <div className="flex justify-center items-center w-14 h-14 bg-yellow-500 rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg

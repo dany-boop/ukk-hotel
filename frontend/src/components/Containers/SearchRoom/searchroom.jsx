@@ -20,22 +20,13 @@ function ContainerSearchRoom() {
         e.preventDefault();
 
         localStorage.setItem('tgl_check_in', JSON.stringify(dataDate.tgl_check_in));
-        localStorage.setItem(
-            'tgl_check_out',
-            JSON.stringify(dataDate.tgl_check_out)
-        );
-
-        const token = localStorage.getItem('token');
+        localStorage.setItem('tgl_check_out', JSON.stringify(dataDate.tgl_check_out));
 
         const sendData = { ...dataDate };
 
         await axios
-            .post('/filtering', sendData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data',
-                }
-            })
+            .post('/filtering', sendData,
+            )
             .then((res) => {
                 if (res) {
                     setDataRoom(res.data.kamar);
@@ -44,7 +35,7 @@ function ContainerSearchRoom() {
                 }
             })
             .catch((err) => {
-                alert('Oops! Silahkan masuk atau daftar terlebih dahulu!');
+                alert('Terjadi kesalahan! Silahkan coba lagi');
 
                 localStorage.removeItem('tgl_check_in');
                 localStorage.removeItem('tgl_check_out');

@@ -75,7 +75,7 @@ function Sidebar() {
             icon: <FaBed className="mr-2 text-lg" />,
         },
         {
-            path: '/admin/booking/add',
+            path: '/admin/booking',
             name: 'Pemesanan',
             icon: <FaShoppingCart className="mr-2 text-lg" />,
         },

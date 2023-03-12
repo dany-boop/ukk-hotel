@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       foto: {
-        type: Sequelize.BLOB("long")
+        type: Sequelize.TEXT
       },
       email: {
         type: Sequelize.STRING

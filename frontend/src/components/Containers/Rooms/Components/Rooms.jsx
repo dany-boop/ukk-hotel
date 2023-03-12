@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaEdit, FaLock, FaTrash } from 'react-icons/fa';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import axios from '../../../../lib/axios';
 import { headerConfig } from '../../../../lib/headerConfig';
@@ -8,7 +9,7 @@ import { headerConfig } from '../../../../lib/headerConfig';
 function AllRoomSection() {
     const [dataLogin, setDataLogin] = useState({});
     const [data, setData] = useState([]);
-
+    const router = useRouter();
     useEffect(() => {
         if (localStorage.getItem('admin')) {
             setDataLogin(JSON.parse(localStorage.getItem('admin') || '{}'));
@@ -18,7 +19,7 @@ function AllRoomSection() {
             setDataLogin(JSON.parse(localStorage.getItem('resepsionis') || '{}'));
         }
 
-        const getData = async () => {
+        const getData = async () => { 
             await axios
                 .get('/kamar', headerConfig())
                 .then((res) => {
@@ -42,7 +43,7 @@ function AllRoomSection() {
                     alert('Data berhasil dihapus!')
                     setTimeout(() => {
                         router.push('/admin/rooms')
-                    }, 1800)
+                    }, 500)
                 } else {
                     alert('Terjadi kesalahan saat menghapus data!')
                 }
@@ -52,6 +53,8 @@ function AllRoomSection() {
                 console.log(err);
             });
     };
+
+    console.log(data)
 
     return (
         <section className="-mx-4 sm:-mx-8 px-4 sm:px-8 overflow-x-auto">

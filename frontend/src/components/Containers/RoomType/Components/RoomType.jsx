@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FaEdit, FaLock, FaTrash } from 'react-icons/fa';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import axios from '../../../../lib/axios';
 import { headerConfig } from '../../../../lib/headerConfig';
@@ -10,6 +12,7 @@ import { formatCurrency } from '../../../../lib/formatCurrency';
 function AllRoomTypeSection() {
     const [dataLogin, setDataLogin] = useState({});
     const [data, setData] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         if (localStorage.getItem('admin')) {
@@ -43,6 +46,9 @@ function AllRoomTypeSection() {
                 res.data.success === 1
                     ? alert('Data berhasil dihapus!')
                     : alert('Terjadi kesalahan saat menghapus data!')
+                setTimeout(() => {
+                    router.push('/admin/room-type')
+                }, 500)
             })
             .catch((err) => {
                 alert('Terjadi kesalahan saat menghapus data!')

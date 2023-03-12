@@ -3,9 +3,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import axios from '../../../lib/axios';
-import StatsSection from './stats';
-import Sidebar from '../../Common/Sidebar';
+import StatsSection from './Components/stats';
+import Sidebar from '@/components/Common/Sidebar';
 import { headerConfig } from '../../../lib/headerConfig';
+import BookingSection from './Components/Booking';
 
 
 function ContainerDashboard() {
@@ -14,6 +15,7 @@ function ContainerDashboard() {
     const [dataTypeRoom, setDataTypeRoom] = useState([]);
     const [dataRoom, setDataRoom] = useState([]);
     const [dataUser, setDataUser] = useState([]);
+    const [dataBooking, setDataBooking] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem('admin')) {
@@ -40,17 +42,26 @@ function ContainerDashboard() {
 
         const getRoom = async () => {
             await axios
-                .get('/room', headerConfig())
+                .get('/kamar', headerConfig())
                 .then((res) => setDataRoom(res.data.data))
                 .catch((err) => (err));
         };
-        Promise.all([getUser(), getTypeRoom(), getRoom(),]);
+
+        const getBooking = async () => {
+            await axios
+                .get('/pemesanan', headerConfig())
+                .then((res) => setDataBooking(res.data.data))
+                .catch((err) => (err));
+        };
+
+        Promise.all([getUser(), getTypeRoom(), getRoom(), getBooking()]);
 
         return () => {
             setUser('');
             setDataTypeRoom([]);
             setDataRoom([]);
             setDataUser([]);
+            setDataBooking([]);
         };
     }, []);
 
@@ -71,7 +82,17 @@ function ContainerDashboard() {
                                 dataUser={dataUser}
                                 dataTypeRoom={dataTypeRoom}
                                 dataRoom={dataRoom}
+                                dataBooking={dataBooking}
                             />
+                        </div>
+                        <div className="w-full p-10">
+                            <div className="pb-6">
+                                <h2 className="text-gray-500 text-2xl font-semibold">
+                                    Daftar Pemesanan
+                                </h2>
+
+                                <BookingSection dataBooking={dataBooking} />
+                            </div>
                         </div>
                     </div>
                 </div>
