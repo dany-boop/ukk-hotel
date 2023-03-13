@@ -13,7 +13,7 @@ function ContainerCheckPemesanan() {
         const sendData = { ...data }
 
         axios
-            .get('/pemesanan/customer', sendData)
+            .get('/pemesanan/   customer', sendData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err))
     }

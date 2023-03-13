@@ -3,6 +3,7 @@ const { Op } = require('sequelize')
 
 const tipe_kamar = require('../models/index').tipe_kamar;
 const kamar = require('../models/index').kamar;
+const pemesanan = require('../models/index').pemesanan;
 const detail_pemesanan = require('../models/index').detail_pemesanan;
 
 const app = express();
@@ -79,6 +80,14 @@ app.post('/', async (req, res) => {
 
     return res.json({ kamar: availableByType });
 })
+
+app.get('/', async (req, res) => {
+    let params = { nama_tamu: req.query.nama_tamu };
+
+    await pemesanan.findAll({ where: params })
+        .then(result => res.json({ data: result }))
+        .catch(error => res.json({ message: error.message }))
+});
 
 module.exports = app
 

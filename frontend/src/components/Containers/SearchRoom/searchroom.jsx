@@ -19,14 +19,13 @@ function ContainerSearchRoom() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        localStorage.setItem('tgl_check_in', JSON.stringify(dataDate.tgl_check_in));
-        localStorage.setItem('tgl_check_out', JSON.stringify(dataDate.tgl_check_out));
+        localStorage.setItem('tgl_check_in', dataDate.tgl_check_in);
+        localStorage.setItem('tgl_check_out', dataDate.tgl_check_out);
 
         const sendData = { ...dataDate };
 
         await axios
-            .post('/filtering', sendData,
-            )
+            .post('/filtering', sendData,)
             .then((res) => {
                 if (res) {
                     setDataRoom(res.data.kamar);

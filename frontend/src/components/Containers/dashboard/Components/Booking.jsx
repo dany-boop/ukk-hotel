@@ -1,4 +1,5 @@
 import React from 'react'
+import BookingItem from './Bookingitem'
 
 import Skeleton from './skeleton'
 
@@ -13,7 +14,9 @@ const BookingSection = ({ dataBooking }) => {
                         dataBooking.map((a, i) => (
                             <BookingItem
                                 id_pemesanan={a.id_pemesanan}
-                                nomor_pemesanan={a.nomor_pemesanan}
+                                nomor_pemesan={a.nomor_pemesan}
+                                nama_pemesan={a.nama_pemesan}
+                                email_pemesan={a.email_pemesan}
                                 nama_tamu={a.nama_tamu}
                                 nama_tipe_kamar={a.tipe_kamar.nama_tipe_kamar}
                                 tgl_check_in={a.tgl_check_in}

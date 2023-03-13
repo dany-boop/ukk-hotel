@@ -1,8 +1,8 @@
 import React from 'react'
-import ContainerUser from '@/components/Containers/User/User'
+import ContainerDetailRoomType from '@/components/Containers/RoomType/details/DetailKamar';
 
-const User = () => {
-    return <ContainerUser />;
+const DetailRoomType = () => {
+    return <ContainerDetailRoomType />;
 };
 
-export default User;
+export default DetailRoomType;

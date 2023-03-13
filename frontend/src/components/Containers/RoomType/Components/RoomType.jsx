@@ -47,7 +47,7 @@ function AllRoomTypeSection() {
                     ? alert('Data berhasil dihapus!')
                     : alert('Terjadi kesalahan saat menghapus data!')
                 setTimeout(() => {
-                    router.push('/admin/room-type')
+                    router.reload
                 }, 500)
             })
             .catch((err) => {
@@ -59,7 +59,7 @@ function AllRoomTypeSection() {
     return (
         <section className="-mx-4 sm:-mx-8 px-4 sm:px-8 overflow-x-auto">
             <table className="min-w-full leading-normal">
-                <thead className="border-gray-200 bg-primary">
+                <thead className="border-yellow-500 bg-primary">
                     <tr>
                         <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-black uppercase tracking-wider">
                             No
@@ -90,7 +90,7 @@ function AllRoomTypeSection() {
                 <tbody>
                     {!data.length ? (
                         <tr>
-                            <td className="animate-pulse transition-all ease-in-out duration-300 bg-gray-100 px-5 py-5 border-b border-gray-200 text-sm">
+                            <td className="animate-pulse transition-all ease-in-out duration-300 bg-gray-100 px-5 py-5 border-b border-yellow-500 text-sm">
                                 <div className="flex items-center select-none">
                                     <p className="bg-gray-200 text-gray-200 whitespace-no-wrap">
                                         this text will not displayed
@@ -98,7 +98,7 @@ function AllRoomTypeSection() {
                                 </div>
                             </td>
 
-                            <td className="animate-pulse transition-all ease-in-out duration-300 bg-gray-100 px-5 py-5 border-b border-gray-200 text-sm">
+                            <td className="animate-pulse transition-all ease-in-out duration-300 bg-gray-100 px-5 py-5 border-b border-yellow-500 text-sm">
                                 <div className="flex items-center select-none">
                                     <p className="bg-gray-200 text-gray-200 whitespace-no-wrap">
                                         this text will not displayed
@@ -106,7 +106,7 @@ function AllRoomTypeSection() {
                                 </div>
                             </td>
 
-                            <td className="animate-pulse transition-all ease-in-out duration-300 bg-gray-100 px-5 py-5 border-b border-gray-200 text-sm">
+                            <td className="animate-pulse transition-all ease-in-out duration-300 bg-gray-100 px-5 py-5 border-b border-yellow-500 text-sm">
                                 <div className="flex items-center select-none">
                                     <p className="bg-gray-200 text-gray-200 whitespace-no-wrap">
                                         this text will not displayed

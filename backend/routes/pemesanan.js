@@ -31,10 +31,10 @@ app.get('/', async (req, res) => {
  * @apiDescription Get booking data by id
  */
 app.get('/:id', async (req, res) => {
-    let params = { pemesanan: req.params.pemesanan };
+    let params = { id_pemesanan: req.params.id };
 
-    await pemesanan.findAll({ where: params, include: ['user', 'tipe_kamar'] })
-        .then(result => res.json({ data: result }))
+    await pemesanan.findOne({ where: params, include: ['user', 'tipe_kamar'] })
+        .then(result => res.json({ pemesanan: result }))
         .catch(error => res.json({ message: error.message }))
 });
 
@@ -59,7 +59,7 @@ app.get('/customer', async (req, res) => {
  * @apiGroup TypeRoom
  * @apiDescription Insert booking data
  */
-app.post('/', auth, async (req, res) => {
+app.post('/', async (req, res) => {
     let dt = Date.now();
     let receiptNum = Math.floor(Math.random() * (1000000000 - 99999999) + 99999999);
 
@@ -74,7 +74,7 @@ app.post('/', auth, async (req, res) => {
         jumlah_kamar: req.body.jumlah_kamar,
         id_tipe_kamar: req.body.id_tipe_kamar,
         id_user: req.body.id_user,
-        status_pemesanan: req.file.status_pemesanan
+        status_pemesanan: req.body.status_pemesanan
     };
     // data kamar
     let dataKamar = await kamar.findAll({ where: { id_tipe_kamar: data.id_tipe_kamar } });
@@ -149,11 +149,11 @@ app.post('/', auth, async (req, res) => {
  * @apiGroup TypeRoom
  * @apiDescription Update tipe_kamar data
  */
-app.put('/', auth, async (req, res) => {
-    let params = { id_pemesanan: req.body.id_pemesanan }
+app.put('/:id', auth, async (req, res) => {
+    let params = { id_pemesanan: req.params.id }
     let data = {
         id_user: req.body.id_user,
-        status_pemesanan: req.file.status_pemesanan
+        status_pemesanan: req.body.status_pemesanan
     }
     await pemesanan.update(data, { where: params })
         .then(result => res.json({ success: 1, message: "Data has been updated" }))
@@ -168,7 +168,7 @@ app.put('/', auth, async (req, res) => {
  */
 app.delete('/:id', auth, async (req, res) => {
     try {
-        let params = { id_pemesanan: req.params.id_pemesanan }
+        let params = { id_pemesanan: req.params.id }
 
         detail_pemesanan.destroy({ where: params })
             .then(result => {

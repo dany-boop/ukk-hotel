@@ -16,7 +16,7 @@ const RoomCardSection = ({ dataRoom }) => {
                                 <div className="col-span-12 lg:col-span-3" key={index}>
                                     <div className="max-w-sm mx-auto rounded-lg overflow-hidden shadow-lg hover:-translate-y-5 transition-all ease-in-out duration-300">
                                         <Link
-                                            href={`/search-room/details/${val.id}`}
+                                            href={`/room-filter/details/${val.id_tipe_kamar}`}
                                             legacyBehavior
                                         >
                                             <a>
@@ -31,7 +31,7 @@ const RoomCardSection = ({ dataRoom }) => {
 
                                         <div className="px-6 py-4">
                                             <Link
-                                                href={`/search-room/details/${val.id}`}
+                                                href={`/room-filter/details/${val.id_tipe_kamar}`}
                                                 legacyBehavior
                                             >
                                                 <a className="font-bold text-xl text-primary">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import axios from '@/lib/axios'
+import { useRouter } from 'next/router'
 import { headerConfig } from '@/lib/headerConfig'
 import { bindingState } from '@/lib/bindingState'
 import Sidebar from '@/components/Common/Sidebar'
@@ -17,6 +17,7 @@ const ContainerAddUser = () => {
         foto: '',
     });
     const [image, setImage] = useState('/assets/img/template-img.png');
+    const router = useRouter();
 
     const handleImage = (e) => {
         let foto = e.target.files[0];
@@ -42,6 +43,9 @@ const ContainerAddUser = () => {
                 res.data.success === 1
                     ? alert('Data berhasil ditambahkan!')
                     : alert('Terjadi kesalahan saat menambah data!')
+                setTimeout(() => {
+                    router.push('/admin/user');
+                }, 1800);
             })
             .catch((err) => {
                 alert('Terjadi kesalahan saat menambah data!')
@@ -59,7 +63,7 @@ const ContainerAddUser = () => {
 
             <Sidebar />
 
-            <main className='bg-white dark:bg-gray-900 md:ml-64 min-h-screen'>
+            <main className='bg-white  md:ml-64 min-h-screen'>
                 <div className="container">
                     <div className="flex flex-wrap">
                         <div className="w-full p-10">

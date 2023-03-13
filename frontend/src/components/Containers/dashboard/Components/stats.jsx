@@ -28,8 +28,8 @@ const StatsSection = ({
                     </div>
                 </div>
 
-                <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-slate-100 dark:border-white text-white font-medium group">
-                    <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+                <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-slate-100 dark:border-white text-yellow-500 font-medium group">
+                    <div className="flex justify-center items-center w-14 h-14 bg-yellow-500 rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg
                             width="30"
                             height="30"

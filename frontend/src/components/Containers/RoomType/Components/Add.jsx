@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import axios from '@/lib/axios'
+import { Router, useRouter } from 'next/router';
 import { bindingState } from '@/lib/bindingState'
 import { headerConfig } from '@/lib/headerConfig'
 import Sidebar from '@/components/Common/Sidebar';
@@ -13,6 +14,8 @@ function ContainerTypeRoomAdd() {
         deskripsi: '',
     });
     const [image, setImage] = useState('/assets/img/template-img-room.png');
+
+    const router = useRouter();
 
     const handleImage = (e) => {
         let foto = e.target.files[0];
@@ -38,6 +41,9 @@ function ContainerTypeRoomAdd() {
                 res.data.success === 1
                     ? alert('Data berhasil ditambahkan!')
                     : alert('Terjadi kesalahan saat menambah data!')
+                setTimeout(() => {
+                    router.push('/admin/room-type');
+                }, 1800);
             })
             .catch((err) => {
                 alert('Terjadi kesalahan saat menambah data!')
@@ -51,7 +57,7 @@ function ContainerTypeRoomAdd() {
         <>
             <Sidebar />
 
-            <main className='bg-white dark:bg-gray-900 md:ml-64 min-h-screen'>
+            <main className='bg-white md:ml-64 min-h-screen'>
                 <div className="container">
                     <div className="flex flex-wrap">
                         <div className="w-full p-10">
@@ -79,7 +85,7 @@ function ContainerTypeRoomAdd() {
                                                 accept="image/*"
                                                 name="image"
                                                 id="image"
-                                                className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring focus:ring-primary/50 sm:text-sm"
+                                                className="block w-full border border-gray-300 text-yellow-500 rounded-md shadow-sm py-2 px-3 focus:ring focus:ring-primary/50 sm:text-sm"
                                                 required
                                                 onChange={handleImage}
                                             />
@@ -89,7 +95,7 @@ function ContainerTypeRoomAdd() {
                                     <div className="mb-5 flex flex-wrap items-center justify-between">
                                         <label
                                             htmlFor="nama_tipe_kamar"
-                                            className="block text-sm font-medium text-gray-500"
+                                            className="block text-sm font-medium text-yellow-500"
                                         >
                                             Nama Tipe Kamar
                                         </label>
@@ -100,7 +106,7 @@ function ContainerTypeRoomAdd() {
                                                 name="nama_tipe_kamar"
                                                 id="nama_tipe_kamar"
                                                 value={data.nama_tipe_kamar}
-                                                className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring focus:ring-primary/50 sm:text-sm"
+                                                className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring focus:ring-primary/50 sm:text-sm "
                                                 placeholder="Nama Tipe Kamar"
                                                 required
                                                 onChange={(e) => bindingState(e, setData, 'nama_tipe_kamar')}
@@ -111,7 +117,7 @@ function ContainerTypeRoomAdd() {
                                     <div className="mb-5 flex flex-wrap items-center justify-between">
                                         <label
                                             htmlFor="harga"
-                                            className="block text-sm font-medium text-gray-500"
+                                            className="block text-sm font-medium text-yellow-500"
                                         >
                                             Harga
                                         </label>
@@ -133,7 +139,7 @@ function ContainerTypeRoomAdd() {
                                     <div className="mb-5 flex flex-wrap items-center justify-between">
                                         <label
                                             htmlFor="deskripsi"
-                                            className="block text-sm font-medium text-gray-500"
+                                            className="block text-sm font-medium text-yellow-500"
                                         >
                                             Deskripsi
                                         </label>

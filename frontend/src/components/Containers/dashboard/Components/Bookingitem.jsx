@@ -9,7 +9,9 @@ import { formatLocalTime } from '../../../../lib/formatLocalTime';
 
 const BookingItem = ({
     id_pemesanan,
-    nomor_pemesanan,
+    nomor_pemesan,
+    nama_pemesan,
+    email_pemesan,
     nama_tamu,
     nama_tipe_kamar,
     tgl_check_in,
@@ -20,15 +22,20 @@ const BookingItem = ({
 }) => {
     const router = useRouter();
 
-    const handleDelete = async (e) => {
-        e.preventDefault();
-
+    const handleDelete = async (id) => {
         alert('Apakah anda yakin ingin menghapus data ini?');
 
         await axios
-            .delete(`/pemesanan/${id_pemesanan}`, headerConfig())
-            .then(() => successToast('Data berhasil dihapus!'))
-            .catch((err) => console.log(err));
+            .delete(`/pemesanan/${id}`, headerConfig())
+            .then((res) => {
+                res.data.status === 1
+                    ? alert('Data berhasil dihapus!')
+                    : alert('Terjadi kesalahan saat menghapus data!');
+            })
+            .catch((err) => {
+                alert('Terjadi kesalahan saat menghapus data!');
+                console.log(err);
+            });
 
         router.reload();
     };
@@ -75,12 +82,26 @@ const BookingItem = ({
                             Nomor Pemesanan
                         </h1>
                         <h1 className="font-bold text-lg text-black">
-                            {nomor_pemesanan || 'Tidak diketahui'}
+                            {nomor_pemesan || 'Tidak diketahui'}
                         </h1>
                     </div>
 
                     <div className="text-left pt-5">
                         <h1 className="font-bold text-sm text-slate-500">Nama Pemesan</h1>
+                        <h1 className="font-bold text-lg text-black">
+                            {nama_pemesan || 'Tidak diketahui'}
+                        </h1>
+                    </div>
+
+                    <div className="text-left pt-5">
+                        <h1 className="font-bold text-sm text-slate-500">Email Pemesan</h1>
+                        <h1 className="font-bold text-lg text-black">
+                            {email_pemesan || 'Tidak diketahui'}
+                        </h1>
+                    </div>
+
+                    <div className="text-left pt-5">
+                        <h1 className="font-bold text-sm text-slate-500">Nama Tamu</h1>
                         <h1 className="font-bold text-lg text-black">
                             {nama_tamu || 'Tidak diketahui'}
                         </h1>
@@ -158,14 +179,14 @@ const BookingItem = ({
 
                 <section>
                     <Link
-                        href={`/admin/transaction/detail/`}
+                        href={`/admin/booking/detail/${id_pemesanan}`}
                         className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
                     >
                         <FaInfoCircle className="mr-2" /> Detail
                     </Link>
 
                     <Link
-                        href={`/admin/transaction/edit/${id_pemesanan}`}
+                        href={`/admin/Booking/edit/${id_pemesanan}`}
                         className="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
                     >
                         <FaEdit className="mr-2" /> Ubah
@@ -174,7 +195,7 @@ const BookingItem = ({
                     <button
                         type="button"
                         className="flex items-center justify-center bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
-                        onClick={(e) => handleDelete(e)}
+                        onClick={() => handleDelete(id_pemesanan)}
                     >
                         <FaTrash className="mr-2" /> Hapus
                     </button>

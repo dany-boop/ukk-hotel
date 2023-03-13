@@ -75,11 +75,6 @@ function Sidebar() {
             icon: <FaBed className="mr-2 text-lg" />,
         },
         {
-            path: '/admin/booking',
-            name: 'Pemesanan',
-            icon: <FaShoppingCart className="mr-2 text-lg" />,
-        },
-        {
             path: '/admin/user',
             name: 'User',
             icon: <FaUserFriends className="mr-2 text-lg" />,

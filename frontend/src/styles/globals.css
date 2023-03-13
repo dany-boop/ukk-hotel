@@ -5,3 +5,72 @@
 html {
   scroll-behavior: smooth;
 }
+
+.avatar-and-cover {
+  @apply relative;
+}
+
+.avatar-and-cover .cover {
+  @apply w-full relative rounded;
+}
+
+.avatar-and-cover .cover .image {
+  @apply relative text-white;
+}
+
+.avatar-and-cover .cover .image img {
+  @apply w-full opacity-90 object-cover rounded;
+}
+
+.avatar-and-cover .cover .image .action {
+  @apply absolute top-0 left-0 right-0 bottom-0 bg-black/60 transition-all duration-300 ease-in-out opacity-0 rounded;
+  visibility: hidden;
+}
+
+.avatar-and-cover .cover .image .action .clickable {
+  @apply cursor-pointer absolute text-[20pt];
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.avatar-and-cover .cover .image:hover .action {
+  @apply visible opacity-100;
+}
+
+.avatar-and-cover .cover .image .black-layer {
+  @apply absolute top-0 left-0 bottom-0 right-0 rounded bg-gradient-to-b from-transparent to-black;
+}
+
+.avatar-and-cover .avatar {
+  @apply absolute bottom-[30px] left-[30px] text-white;
+}
+
+.avatar-and-cover .avatar .image {
+  @apply relative w-20 h-20;
+}
+
+.avatar-and-cover .avatar .image img {
+  @apply w-full h-full object-cover rounded-full border-4 border-white;
+}
+
+.avatar-and-cover .avatar .image .action {
+  @apply absolute top-0 left-0 right-0 bottom-0 bg-black/60 transition-all duration-300 ease-in-out opacity-0 rounded-full;
+  visibility: hidden;
+}
+
+.avatar-and-cover .avatar .image .action i {
+  @apply text-[15pt] absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.avatar-and-cover .avatar .image:hover .action {
+  visibility: visible;
+  opacity: 1;
+}
+
+.avatar-and-cover .avatar hr {
+  @apply bg-white opacity-50 m-0 mb-[5px];
+}
