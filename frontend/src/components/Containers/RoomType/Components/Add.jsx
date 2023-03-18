@@ -4,7 +4,7 @@ import axios from '@/lib/axios'
 import { Router, useRouter } from 'next/router';
 import { bindingState } from '@/lib/bindingState'
 import { headerConfig } from '@/lib/headerConfig'
-import Sidebar from '@/components/Common/Sidebar';
+import Sidebar from '@/components/Common/SidebarAdmin';
 
 function ContainerTypeRoomAdd() {
     const [data, setData] = useState({
@@ -85,7 +85,7 @@ function ContainerTypeRoomAdd() {
                                                 accept="image/*"
                                                 name="image"
                                                 id="image"
-                                                className="block w-full border border-gray-300 text-yellow-500 rounded-md shadow-sm py-2 px-3 focus:ring focus:ring-primary/50 sm:text-sm"
+                                                className="block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:ring focus:ring-primary/50 sm:text-sm"
                                                 required
                                                 onChange={handleImage}
                                             />
@@ -95,7 +95,7 @@ function ContainerTypeRoomAdd() {
                                     <div className="mb-5 flex flex-wrap items-center justify-between">
                                         <label
                                             htmlFor="nama_tipe_kamar"
-                                            className="block text-sm font-medium text-yellow-500"
+                                            className="block text-sm font-medium text-gray-700"
                                         >
                                             Nama Tipe Kamar
                                         </label>
@@ -117,7 +117,7 @@ function ContainerTypeRoomAdd() {
                                     <div className="mb-5 flex flex-wrap items-center justify-between">
                                         <label
                                             htmlFor="harga"
-                                            className="block text-sm font-medium text-yellow-500"
+                                            className="block text-sm font-medium text-gray-700"
                                         >
                                             Harga
                                         </label>
@@ -139,7 +139,7 @@ function ContainerTypeRoomAdd() {
                                     <div className="mb-5 flex flex-wrap items-center justify-between">
                                         <label
                                             htmlFor="deskripsi"
-                                            className="block text-sm font-medium text-yellow-500"
+                                            className="block text-sm font-medium text-gray-700"
                                         >
                                             Deskripsi
                                         </label>

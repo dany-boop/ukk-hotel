@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { FaFolderPlus } from 'react-icons/fa'
 
-import { classNames } from '@/lib/classNames'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/Common/SidebarAdmin'
+import SidebarReceptionist from '@/components/Common/SidebarReceptionist'
 import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import AllRoomTypeSection from './Components/RoomType'
@@ -36,7 +36,8 @@ function ContainerRoomType() {
 
     return (
         <>
-            <Sidebar />
+            {dataLogin?.role == 'admin' && <Sidebar />}
+            {dataLogin?.role == 'resepsionis' && <SidebarReceptionist />}
             <main>
                 <div>
                     <section className="bg-white dark:bg-white md:ml-64 min-h-screen">

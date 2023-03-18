@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { FaFolderPlus } from 'react-icons/fa'
 
 import { classNames } from '@/lib/classNames'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/Common/SidebarAdmin'
 import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import AllRoomSection from './Components/Rooms'
-import Rooms from '@/pages/admin/rooms'
+import SidebarReceptionist from '@/components/Common/SidebarReceptionist'
 function ContainerRooms() {
     const [data, setData] = useState({});
 
@@ -36,7 +36,8 @@ function ContainerRooms() {
 
     return (
         <>
-            <Sidebar />
+            {dataLogin?.role == 'admin' && <Sidebar />}
+            {dataLogin?.role == 'resepsionis' && <SidebarReceptionist />}
             <main>
                 <div>
                     <section className="bg-white dark:bg-white md:ml-64 min-h-screen">

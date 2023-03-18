@@ -6,7 +6,7 @@ import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import { formatCurrency } from '@/lib/formatCurrency'
 import { bindingState } from '@/lib/bindingState'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/Common/SidebarAdmin'
 
 const ContainerEditUser = () => {
     const [oldData, setOldData] = useState({});
@@ -104,7 +104,7 @@ const ContainerEditUser = () => {
 
             <Sidebar />
 
-            <main className='bg-white dark:bg-gray-900 md:ml-64 min-h-screen'>
+            <main className='bg-white md:ml-64 min-h-screen'>
                 <div className="container">
                     <div className="flex flex-wrap">
                         <div className="w-full p-10">

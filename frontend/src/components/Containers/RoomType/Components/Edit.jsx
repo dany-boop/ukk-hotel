@@ -6,7 +6,7 @@ import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import { formatCurrency } from '@/lib/formatCurrency'
 import { bindingState } from '@/lib/bindingState'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/Common/SidebarAdmin'
 
 const ContainerEditRoomType = () => {
     const [oldData, setOldData] = useState({});

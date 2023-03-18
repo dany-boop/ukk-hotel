@@ -67,11 +67,11 @@ function Navbar() {
                                             <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>Login</a>
                                         </Link>
                                     </li>
-                                    <li className='group'>
+                                    {/* <li className='group'>
                                         <Link href='/auth/register' legacyBehavior>
                                             <a className='text-base text-black py-2 mx-8 lg:mx-2 flex group-hover:text-yellow-400 transition duration-300 ease-in-out'>Register</a>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </nav>
                         </div>

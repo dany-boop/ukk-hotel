@@ -18,8 +18,17 @@ app.use(express.json());
  * @apiGroup TypeRoom
  * @apiDescription Get all booking data
  */
-app.get('/', async (req, res) => {
-    await pemesanan.findAll({ include: ['user', 'tipe_kamar'] })
+app.get('/', auth, async (req, res) => {
+    let status = req.query.status || '';
+
+    await pemesanan.findAll({
+        where: {
+            [Op.or]: [{
+                status_pemesanan: { [Op.like]: `%${status}%` }
+            }]
+        },
+        include: ['user', 'tipe_kamar']
+    })
         .then(result => res.json({ data: result }))
         .catch(error => res.json({ message: error.message }))
 });

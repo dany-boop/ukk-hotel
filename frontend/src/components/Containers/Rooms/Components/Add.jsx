@@ -5,7 +5,7 @@ import axios from '@/lib/axios'
 import { bindingState } from '@/lib/bindingState'
 import { headerConfig } from '@/lib/headerConfig'
 import { formatCurrency } from '@/lib/formatCurrency'
-import Sidebar from '@/components/Common/Sidebar';
+import Sidebar from '@/components/Common/SidebarAdmin';
 
 function ContainerRoomAdd() {
     const router = useRouter();

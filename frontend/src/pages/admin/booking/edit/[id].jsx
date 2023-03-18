@@ -2,13 +2,13 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 import { blockAccess } from '@/lib/blockAccess';
-import ContainerProfile from '@/components/Containers/Profile/Profile';
+import ContainerEditBooking from '@/components/Containers/Booking/Edit';
 
-const Profile = () => {
+const EditBooking = () => {
     const router = useRouter();
     blockAccess('admin', router);
 
-    return <ContainerProfile />;
+    return <ContainerEditBooking />;
 };
 
-export default Profile;
+export default EditBooking;

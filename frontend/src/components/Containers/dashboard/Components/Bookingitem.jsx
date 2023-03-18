@@ -33,13 +33,11 @@ const BookingItem = ({
                     : alert('Terjadi kesalahan saat menghapus data!');
             })
             .catch((err) => {
-                alert('Terjadi kesalahan saat menghapus data!');
                 console.log(err);
             });
 
         router.reload();
     };
-
     const badgeColorTransaction = (status) => {
         switch (status) {
             case 'check_out':
@@ -72,6 +70,8 @@ const BookingItem = ({
 
         return totalDays;
     };
+
+
 
     return (
         <div className="container bg-slate-100 rounded-lg p-5 mb-5">
@@ -186,7 +186,7 @@ const BookingItem = ({
                     </Link>
 
                     <Link
-                        href={`/admin/Booking/edit/${id_pemesanan}`}
+                        href={`/admin/booking/edit/${id_pemesanan}`}
                         className="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
                     >
                         <FaEdit className="mr-2" /> Ubah

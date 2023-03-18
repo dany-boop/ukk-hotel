@@ -5,10 +5,10 @@ import { blockAccess } from '@/lib/blockAccess';
 import ContainerProfile from '@/components/Containers/Profile/Profile';
 
 const Profile = () => {
-    const router = useRouter();
-    blockAccess('admin', router);
+  const router = useRouter();
+  blockAccess('resepsionis', router);
 
-    return <ContainerProfile />;
+  return <ContainerProfile />;
 };
 
 export default Profile;

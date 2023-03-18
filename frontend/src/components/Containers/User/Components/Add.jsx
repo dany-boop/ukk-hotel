@@ -5,7 +5,7 @@ import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
 import { headerConfig } from '@/lib/headerConfig'
 import { bindingState } from '@/lib/bindingState'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/Common/SidebarAdmin'
 
 const ContainerAddUser = () => {
     const [data, setData] = useState({

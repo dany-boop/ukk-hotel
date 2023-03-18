@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { FaFolderPlus } from 'react-icons/fa'
 
 import { classNames } from '@/lib/classNames'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/common/SidebarAdmin'
+import SidebarReceptionist from '@/components/common/SidebarReceptionist'
 import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import AllUserSection from './Components/User'
@@ -36,7 +37,9 @@ function ContainerUser() {
 
     return (
         <>
-            <Sidebar />
+            {dataLogin?.role === 'admin' && <Sidebar />}
+
+            {dataLogin?.role === 'resepsionis' && <SidebarReceptionist />}
             <main>
                 <div>
                     <section className="bg-white dark:bg-white md:ml-64 min-h-screen">

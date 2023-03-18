@@ -6,7 +6,7 @@ import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import { formatCurrency } from '@/lib/formatCurrency'
 import { bindingState } from '@/lib/bindingState'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/Common/SidebarAdmin'
 
 const ContainerEditRooms = () => {
     const [dataTypeRoom, setDataTypeRoom] = useState([]);
@@ -102,12 +102,12 @@ const ContainerEditRooms = () => {
 
             <Sidebar />
 
-            <main className='bg-white dark:bg-gray-900 md:ml-64 min-h-screen'>
+            <main className='bg-white md:ml-64 min-h-screen'>
                 <div className="container">
                     <div className="flex flex-wrap">
                         <div className="w-full p-10">
                             <h2 className="text-2xl font-bold text-primary mb-5">
-                                Ubah Data User
+                                Ubah Data Kamar
                             </h2>
 
                             <section className="bg-white p-5 rounded-lg shadow-md">

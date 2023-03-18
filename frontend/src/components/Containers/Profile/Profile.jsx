@@ -3,10 +3,10 @@ import Head from 'next/head';
 
 import axios from '@/lib/axios';
 import { headerConfig } from '@/lib/headerConfig';
-import { classNames } from '@/lib/classNames';
-import Sidebar from '@/components/Common/Sidebar';
-import Link from 'next/link';
+import Sidebar from '@/components/common/SidebarAdmin';
+import SidebarReceptionist from '@/components/common/SidebarReceptionist';
 import PreviewProfile from './Components/Preview';
+// import EditProfile from './Components/edit';
 
 
 function ContainerProfile() {
@@ -43,11 +43,9 @@ function ContainerProfile() {
             <Head>
                 <title>Profil Saya - Wikusama Hotel</title>
             </Head>
-            <Sidebar />
-
-            {/* {dataLogin?.role === 'admin' && <SidebarAdmin />} */}
-
-            {/* {dataLogin?.role === 'resepsionis' && <SidebarReceptionist />} */}
+            {dataLogin?.role == 'admin' && <Sidebar />}
+            
+            {dataLogin?.role == 'resepsionis' && <SidebarReceptionist />}
 
             <main className="bg-white md:ml-64 min-h-screen">
                 <div className="container">
@@ -58,6 +56,7 @@ function ContainerProfile() {
                             </h2>
                             <PreviewProfile />
                         </div>
+                        {/* <EditProfile/> */}
                     </div>
                 </div>
             </main >

@@ -16,10 +16,10 @@ import {
 
 import axios from '../../lib/axios';
 import { logout } from '../../lib/logout';
-import { blockAccess } from '../../lib/blockAccess';
+import { blockAccess } from '@/lib/blockAccess';
 import { classNames } from '../../lib/classNames';
 
-function Sidebar() {
+function SidebarReceptionist() {
     // Define Router
     const router = useRouter();
     const { pathname } = router;
@@ -35,47 +35,43 @@ function Sidebar() {
     const activeClass =
         'bg-yellow-500 rounded text-white text-xs uppercase p-3 mt-2 mb-1 font-bold flex'
     const inActiveClass =
-        'text-yellow-900 hover:text-black text-xs uppercase py-3 font-bold flex'
+        'text-yellow-900 hover:text-yellow-500 text-xs uppercase py-3 font-bold flex'
 
     const isMenuActive = (path) => {
         const isDashboard =
-            (pathname === '/admin/dashboard' && path === '/admin/dashboard') ||
-            (pathname === '/receptionist/dashboard' &&
-                path === '/receptionist/dashboard');
+            pathname === '/receptionist/dashboard' &&
+            path === '/receptionist/dashboard';
 
         if (isDashboard) {
             return true;
         }
 
         return (
-            (pathname !== '/admin/dashboard' &&
-                path !== '/admin/dashboard' &&
-                pathname.includes(path)) ||
-            (pathname !== '/receptionist/dashboard' &&
-                path !== '/receptionist/dashboard' &&
-                pathname.includes(path))
+            pathname !== '/receptionist/dashboard' &&
+            path !== '/receptionist/dashboard' &&
+            pathname.includes(path)
         );
     };
 
-    // Access Navigation for Admin
-    const adminLinks = [
+    // Access Navigation for Receptionist
+    const receptionistLinks = [
         {
-            path: '/admin/dashboard',
-            name: 'Dashboard Admin',
+            path: '/receptionist/dashboard',
+            name: 'Dashboard Resepsionis',
             icon: <FaHome className="mr-2 text-lg" />,
         },
         {
-            path: '/admin/room-type',
+            path: '/receptionist/room-type',
             name: 'Tipe Kamar',
             icon: <FaBuilding className="mr-2 text-lg" />,
         },
         {
-            path: '/admin/rooms',
+            path: '/receptionist/rooms',
             name: 'Kamar',
             icon: <FaBed className="mr-2 text-lg" />,
         },
         {
-            path: '/admin/user',
+            path: '/receptionist/user',
             name: 'User',
             icon: <FaUserFriends className="mr-2 text-lg" />,
         },
@@ -83,8 +79,8 @@ function Sidebar() {
 
     // Render data from local storage
     useEffect(() => {
-        const getAdmin = async () => {
-            const admin = JSON.parse(localStorage.getItem('admin') || '{}');
+        const getReceptionist = async () => {
+            const receptionist = JSON.parse(localStorage.getItem('resepsionis') || '{}');
 
             await axios
                 .get('/user', {
@@ -92,21 +88,21 @@ function Sidebar() {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
                 })
-                .then(() => setUserName(admin.nama_user))
+                .then(() => setUserName(receptionist.nama_user))
                 .catch((err) => console.log(err));
         };
 
-        Promise.all([getAdmin()]);
+        Promise.all([getReceptionist()]);
     }, []);
 
-    // Block Access if Login level is not Admin
-    blockAccess('admin' || 'resepsionis', router);
+    // Block Access if Login level is not Receptionist
+    blockAccess('resepsionis', router);
 
     return (
         <>
             <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden bg-slate-100 flex flex-wrap items-center justify-between relative md:w-64 z-20 py-4 px-6">
                 <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-                    <Link href="/admin/dashboard" legacyBehavior>
+                    <Link href="/receptionist/dashboard" legacyBehavior>
                         {!userName ? (
                             <p className="md:block text-left md:pb-2 text-gray-500 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
                                 Halo,
@@ -152,7 +148,7 @@ function Sidebar() {
                         <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
                             <div className="flex flex-wrap">
                                 <div className="w-6/12">
-                                    <Link href="/admin/dashboard" legacyBehavior>
+                                    <Link href="/receptionist/dashboard" legacyBehavior>
                                         <a className="md:block text-left text-white md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0">
                                             <h1 className="text-black font-bold text-xl">
                                                 <span className="text-primary">Wikusama</span> Hotel
@@ -179,7 +175,7 @@ function Sidebar() {
                         </h6>
 
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-                            {adminLinks.map((link, index) => (
+                            {receptionistLinks.map((link, index) => (
                                 <li key={index} className="items-center">
                                     <Link href={link.path} legacyBehavior>
                                         <a
@@ -196,7 +192,7 @@ function Sidebar() {
 
                             <li>
                                 <Link href="/" legacyBehavior>
-                                    <a className="text-yellow-900 hover:text-black text-xs uppercase py-3 font-bold flex">
+                                    <a className="text-yellow-900 hover:text-yellow-500 text-xs uppercase py-3 font-bold flex">
                                         <FaGlobe className="mr-2 text-lg" />
                                         Landing Page
                                     </a>
@@ -213,10 +209,10 @@ function Sidebar() {
 
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
                             <li className="items-center">
-                                <Link href="/admin/profile" legacyBehavior>
+                                <Link href="/receptionist/profile" legacyBehavior>
                                     <a
                                         className={classNames(
-                                            isMenuActive('/admin/profile')
+                                            isMenuActive('/receptionist/profile')
                                                 ? activeClass
                                                 : inActiveClass
                                         )}
@@ -229,7 +225,7 @@ function Sidebar() {
                             <li className="items-center">
                                 <button
                                     className={inActiveClass}
-                                    onClick={() => logout('admin', router)}
+                                    onClick={() => logout('resepsionis', router)}
                                 >
                                     <FaSignOutAlt className="mr-2 text-lg" />
                                     Keluar
@@ -255,4 +251,4 @@ function Sidebar() {
     );
 };
 
-export default Sidebar;
+export default SidebarReceptionist;

@@ -37,7 +37,7 @@ function PreviewProfile() {
                     </div>
 
                     <div className="mt-2">
-                        <h4 className="font-semibold text-2xl leading-7 mb-2">
+                        <h4 className="font-semibold text-yellow-500 text-2xl leading-7 mb-2">
                             {data?.nama_user || data?.nama || 'Tidak ada data'}
                         </h4>
 

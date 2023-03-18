@@ -6,7 +6,7 @@ import Link from 'next/link'
 import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import { formatLocalTime } from '@/lib/formatlocaltime'
-import Sidebar from '@/components/Common/Sidebar'
+import Sidebar from '@/components/common/SidebarAdmin'
 
 function ContainerDetailBooking() {
     const [user, setUser] = useState('');
@@ -58,11 +58,14 @@ function ContainerDetailBooking() {
         }
     }, [id]);
 
+    console.log(dataRoom)
+
     return (
         <>
             <Head>
                 <title>Detail Pemesanan - Wikusama Hotel</title>
             </Head>
+
             <Sidebar />
             <main className="bg-white md:ml-64 min-h-screen">
                 <section className="container">
@@ -199,7 +202,7 @@ function ContainerDetailBooking() {
                                                 <Link
                                                     href={
                                                         user.role === 'admin'
-                                                            ? `/admin/booking/detail/${id}/invoice`
+                                                            ? `/admin/booking/detail/${id}/Invoice`
                                                             : `/receptionist/booking/detail/${id}/invoice`
                                                     }
                                                     legacyBehavior
@@ -278,7 +281,7 @@ function ContainerDetailBooking() {
                                                             </td>
                                                         </tr>
                                                     ) : (
-                                                        dataRoom?.map((val, index) => (
+                                                        dataRoom.map((val, index) => (
                                                             <tr key={index} className="bg-gray-500">
                                                                 <td className="px-5 py-5 border-b border-gray-200 bg-gray-100 text-sm">
                                                                     <div className="flex items-center">
