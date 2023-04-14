@@ -5,7 +5,7 @@ import { FaEdit, FaInfoCircle, FaTrash } from 'react-icons/fa';
 
 import axios from '../../../../lib/axios';
 import { headerConfig } from '../../../../lib/headerConfig';
-import { formatLocalTime } from '../../../../lib/formatLocalTime';
+import { formatLocalTime } from '@/lib/formatlocaltime';
 
 const BookingItem = ({
     id_pemesanan,
@@ -19,6 +19,7 @@ const BookingItem = ({
     tgl_pemesanan,
     jumlah_kamar,
     status_pemesanan,
+    user,
 }) => {
     const router = useRouter();
 
@@ -176,33 +177,54 @@ const BookingItem = ({
                         </h1>
                     </div>
                 </section>
+                
+                {user.role === 'admin' || user.role === 'resepsionis' ? (
+          <section>
+            <Link
+              href={
+                user?.role === 'admin'
+                  ? `/admin/booking/detail/${id_pemesanan}`
+                  : `/receptionist/booking/detail/${id_pemesanan}`
+              }
+              className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+            >
+              <FaInfoCircle className="mr-2" /> Detail
+            </Link>
 
-                <section>
-                    <Link
-                        href={`/admin/booking/detail/${id_pemesanan}`}
-                        className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
-                    >
-                        <FaInfoCircle className="mr-2" /> Detail
-                    </Link>
+            <Link
+              href={
+                user?.role === 'admin'
+                  ? `/admin/booking/edit/${id_pemesanan}`
+                  : `/receptionist/booking/edit/${id_pemesanan}`
+              }
+              className="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
+            >
+              <FaEdit className="mr-2" /> Ubah
+            </Link>
 
-                    <Link
-                        href={`/admin/booking/edit/${id_pemesanan}`}
-                        className="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
-                    >
-                        <FaEdit className="mr-2" /> Ubah
-                    </Link>
-
-                    <button
-                        type="button"
-                        className="flex items-center justify-center bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
-                        onClick={() => handleDelete(id_pemesanan)}
-                    >
-                        <FaTrash className="mr-2" /> Hapus
-                    </button>
-                </section>
-            </div>
-        </div>
-    );
+            {user?.role === 'admin' && (
+              <button
+                type="button"
+                className="flex items-center justify-center bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer mt-2"
+                onClick={() => handleDelete(id_pemesanan)}
+              >
+                <FaTrash className="mr-2" /> Hapus
+              </button>
+            )}
+          </section>
+        ) : (
+          <section>
+            <Link
+              href={`/customer/booking/detail/${id_pemesanan}`}
+              className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+            >
+              <FaInfoCircle className="mr-2" /> Detail
+            </Link>
+          </section>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default BookingItem;

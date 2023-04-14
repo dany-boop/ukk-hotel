@@ -13,7 +13,7 @@ import BookingSection from './Components/Booking';
 
 function ContainerDashboard() {
     const [user, setUser] = useState('');
-    const [userRole, setUserRole] = useState('')
+    // const [userRole, setUserRole] = useState('')
     const [dataTypeRoom, setDataTypeRoom] = useState([]);
     const [dataRoom, setDataRoom] = useState([]);
     const [dataUser, setDataUser] = useState([]);

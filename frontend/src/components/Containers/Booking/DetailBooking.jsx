@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import React,{useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -7,6 +7,7 @@ import axios from '@/lib/axios'
 import { headerConfig } from '@/lib/headerConfig'
 import { formatLocalTime } from '@/lib/formatlocaltime'
 import Sidebar from '@/components/common/SidebarAdmin'
+import SidebarReceptionist from '@/components/Common/SidebarReceptionist'
 
 function ContainerDetailBooking() {
     const [user, setUser] = useState('');
@@ -66,7 +67,10 @@ function ContainerDetailBooking() {
                 <title>Detail Pemesanan - Wikusama Hotel</title>
             </Head>
 
-            <Sidebar />
+            {user?.role === 'admin' && <Sidebar />}
+
+            {user?.role === 'resepsionis' && <SidebarReceptionist />}
+            
             <main className="bg-white md:ml-64 min-h-screen">
                 <section className="container">
                     <div className="flex flex-wrap">
