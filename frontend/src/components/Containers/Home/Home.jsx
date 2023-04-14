@@ -5,7 +5,11 @@ import Navbar from '@/components/Common/Navbar/Navbar'
 import Footer from '@/components/Common/Footer'
 import TopSection from './components/TopSection'
 import AboutSection from './components/About'
-import Carousel from './Carousel'
+import Carousel from './components/Carousel'
+import RecomendationSection from './components/Recommendation'
+import FacilitiesSection from './components/Facilities'
+import FAQ from './components/FAQ'
+import CallToAction from './components/CallToAction'
 
 
 function ContainerHome() {
@@ -19,8 +23,11 @@ function ContainerHome() {
 
             <main className="pt-20">
                 <TopSection />
+                <RecomendationSection/>
                 <AboutSection />
-                <Carousel/>
+                <FacilitiesSection/>
+                <FAQ/>
+                <CallToAction/>
             </main>
 
             <Footer />

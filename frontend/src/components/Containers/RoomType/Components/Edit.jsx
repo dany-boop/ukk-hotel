@@ -7,6 +7,7 @@ import { headerConfig } from '@/lib/headerConfig'
 import { formatCurrency } from '@/lib/formatCurrency'
 import { bindingState } from '@/lib/bindingState'
 import Sidebar from '@/components/Common/SidebarAdmin'
+import SidebarReceptionist from '@/components/Common/SidebarReceptionist'
 
 const ContainerEditRoomType = () => {
     const [oldData, setOldData] = useState({});
@@ -98,7 +99,8 @@ const ContainerEditRoomType = () => {
                 <title>Ubah Data Tipe Kamar - Wikusama Hotel</title>
             </Head>
 
-            <Sidebar />
+            {/* {dataLogin?.role == 'admin' && <Sidebar />}
+            {dataLogin?.role == 'resepsionis' && <SidebarReceptionist />} */}
 
             <main className='bg-white  md:ml-64 min-h-screen'>
                 <div className="container">

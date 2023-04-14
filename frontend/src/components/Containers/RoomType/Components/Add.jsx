@@ -55,7 +55,6 @@ function ContainerTypeRoomAdd() {
 
     return (
         <>
-            <Sidebar />
 
             <main className='bg-white md:ml-64 min-h-screen'>
                 <div className="container">
